@@ -34,21 +34,27 @@ Esta base contém dados extremamente sensíveis e deve ser protegida com os maio
 
 Banco de dados escolhido: PostgreSQL.
 
-Se compararmos com o MySQL, o PostgreSQL é um banco mais robusto e que possui mais recursos. O principal motivo que me fez escolher este banco para esta base foi integridade. Quando se refere a integridade dos dados, o PostgreSQL prover várias técnicas avançadas para tal.
+O PostgreSQL é um banco robusto que possui vários recursos. O principal motivo que me fez escolher este banco para esta base foi integridade. Quando se refere a integridade dos dados, o PostgreSQL prover várias técnicas avançadas para tal.
 
  - **Checkpoints**: Para a gravação de dados em massa, o banco armazena temporariamente os dados na memória RAM. Como a mesma é volátil, existe um grande risco do dado se perder na transição. Os checkpoints forçam todas as transações concluidas a serem gravadas da RAM para o disco.
  - **Write-Ahead Logging (WAL)**: Todas as mudanças são gravadas somente após o registro no log. Esta técnica garante que se ocorrer alguma falha no meio da transição, seja possível recuperar o banco usando o log. Essa recuperação é conhecida REDO.
- - **Transaction Logging**: Além de serem gravadas no banco, todas as modificações de transações (Insert, Delete, Update e etc) são gravadas no log. Essa duplicidade de informação reduz a perda de dados por falha hardware ou queda de energia.
- - **riggers**: O usuário do banco pode escrever gatilhos que garantem a integridade referencial das tabelas.
- - **Commit/Rollback**: Certas funções de banco de dados requerem o agrupamento de transações de modo que, se qualquer parte de uma função falhar, toda a função falhe. Um exemplo disso é a transferência bancária. Caso o insert falhe, é dado um Rollback na função e nenhum valor é movimentado.
+ - **Transaction Logging**: Além de serem gravadas no banco, todas as modificações de transações (Insert, Delete, Update e etc) são gravadas no log. Essa duplicidade de informação reduz a perda de dados por falha de hardware ou queda de energia.
+ - **Triggers**: O usuário do banco pode escrever gatilhos que garantem a integridade referencial das tabelas.
+ - **Commit/Rollback**: Certas funções de banco de dados requerem o agrupamento de transações de modo que, se qualquer parte de uma função falhar, toda a função falhe. Um exemplo disso é a transferência bancária. Caso o insert falhe, é dado um *rollback* na função e nenhum valor é movimentado.
  - **Sistemas de papéis (ROLES)**: O PostgreSQL gerencia as permissões através deste sistema. Basicamente cada usuário possui um papel que está associado a um grupo de permissões.
  - **SSL**: Permite conexões criptografadas na comunicação cliente/servidor
 
 #### Base B
 
-A base B também possui dados críticos, porém, ao contrário da Base A, o acesso precisa ser mais rápido. Além disso, esta base é usada para para a extração de dados por meio de algoritmos de aprendizado de máquina.
+A base B também possui dados críticos, porém, ao contrário da Base A, o acesso precisa ser mais rápido. Além disso, esta base é usada para a extração de dados por meio de algoritmos de aprendizado de máquina.
 
-Para a construção desta base....
+Banco de dados escolhido: PostegreSQL
+
+Nesta base a performance é mais crucial que na base A, além disso, é preciso se preocupar com a integridade (já que também possui dados cŕiticos). Escolhi usar PosgreSQL pois é um banco que além de seguro, performa muito bem quando se trata de velocidade de leitura e escrita.
+
+Outra opção seria usar um banco NoSQL já que são bem mais performáticos do que o PostgreSQL (baseado no modelo DBMS). Porém neste caso, além da velocidade é preciso também garantir a segurança. Como os NoSQL's não possuem uma segurança tão robusta quanto os DBMS's, decidi usar o mesmo da Base A.
+
+Obs: Apesar de serem base de dados com propósitos um pouco diferentes. Não vi necessidade de mudar o banco. Afinal, o PostgreSQL trabalhar muito bem em ambas.
 
 #### Base C
 
@@ -80,3 +86,7 @@ O tráfego é composto por sistemas com duas diferentes arquiteturas: micro-serv
 ###### 3 - [How to build a cloud-based SaaS application](https://usersnap.com/blog/cloud-based-saas-architecture-fundamentals/)
 
 ###### 4 - [PostgreSQL - Data Integrity](http://www.dbexperts.net/postgresql/integrity)
+
+###### 5 - [Top 5 SQL Databases](https://dzone.com/articles/top-5-sql-databases)
+
+###### 6 - [Top 4 NoSQL Databases](https://dzone.com/articles/top-4-nosql-databases)
