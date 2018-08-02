@@ -18,9 +18,11 @@ Baseado nisso, foi criado o seguinte modelo arquitetural
 
 ## Modelo Arquitetural
 
-![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/arquiteturabirocredit.png)
+![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/imagens/modelo-arquitetural.png)
 
 ## Armazenamento
+
+![Armazenamento](https://github.com/matheuslins/birocredit/blob/master/imagens/armazenamento.png)
 
 Um bom sistema de gerenciamento de dados (SGBD) deve fornecer mecanismos que auxiliam sua segurança. Um SGBD seguro oferece:
 
@@ -70,6 +72,8 @@ A escolha do MongoDB se dar por várias razões. São elas:
 - Possui o recurso de particionamento de dados, o que facilita a escalabilidade horizontal
 
 ## Tráfego
+
+![Tragego](https://github.com/matheuslins/birocredit/blob/master/imagens/trafego.png)
 
 ###### Arquitetura
 
@@ -168,6 +172,9 @@ Será utilizado o [RabbitMQ](http://www.rabbitmq.com) para tal.
 
 
 ## Disponibilidade dos dados
+
+![Disponibilidade dos dados](https://github.com/matheuslins/birocredit/blob/master/imagens/disponibilidade-dos-dados.png)
+
 ## Tecnologias Usadas
 ## Referências
 
