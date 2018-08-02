@@ -54,7 +54,7 @@ Nesta base a performance é mais crucial que na base A, além disso, é preciso 
 
 Outra opção seria usar um banco NoSQL já que são bem mais performáticos do que o PostgreSQL (baseado no modelo DBMS). Porém neste caso, além da velocidade é preciso também garantir a segurança. Como os NoSQL's não possuem uma segurança tão robusta quanto os DBMS's, decidi usar o mesmo da Base A.
 
-Obs: Apesar de serem base de dados com propósitos um pouco diferentes. Não vi necessidade de mudar o banco. Afinal, o PostgreSQL trabalhar muito bem em ambas.
+Obs: Apesar de a Base A e a Base B terem propósitos um pouco diferentes. Não vi necessidade de mudar o banco. Afinal, o PostgreSQL trabalhar muito bem em ambas.
 
 #### Base C
 
@@ -71,7 +71,100 @@ A escolha do MongoDB se dar por várias razões. São elas:
 
 ## Tráfego
 
-O tráfego é composto por sistemas com duas diferentes arquiteturas: micro-serviços e nano-serviços. Por isso são baseados em API's construídas com micro-framework.
+###### Arquitetura
+
+Para que todos os dados sejam disponibilizados de forma escalável, segura e rápida, será utilizado uma arquitura baseada em API.
+
+###### Comunicação
+
+Uma boa prática na construção de múltiplos micro serviços, é nunca depender de uma comunicação síncrona. O *entrypoint* (ponto de entrada), pode ser disponibilizado através de um protocolo sincrono (HTTP), já que é uma comunicação direta de pedido e resposta, mas os micro serviços se comunicam indiretamente, por isso o ideal é que essa comunicação seja assincrôna.
+
+###### API Geteway
+
+A melhor abordagem para a comunicação *client-to-microservice* é usando uma espécie de orquestrador. A API Geteway, possui algumas vantagem que me fizeram escolher esse padrão. São elas:
+
+- **Controle de acesso**: Através de *API Keys* é possível *trackear* o uso de cada API.
+- **Controle de requests**: É possível controlar quantas requisições cada usuário faz para cada API.
+- **Análise e Monitoramento**: Entendimento de como as API's estão iniciando e performando.
+- **Controle de Cache**: Com esse controle, é possível acelerar o acesso ao dado em cada API.
+- **Single Public Endpoint**: Todas as requests dos clientes passam por um único ponto.
+
+Para construção de tal, será usado o [API Umbrella](https://apiumbrella.io/)
+
+###### Micro Serviços
+
+Será utilizado o estilo arquitetural REST. As API's REST estarão disponíveis como micro serviços facilitando a integração com as bases.
+
+Também é importante frizar que uma API REST deve seguir alumas regras para que possa ser considerada REST de fato:
+
+**1 - Oferecer acesso através de recursos**: Através de seus *endpoints* a API precisa oferecer seus recursos onde o cliente possa utilizar operações padrões, ao invés de uma interface de comando especifica.
+
+Não é REST: `/changeTodoList.php?item=35&action=changeTitle&title=new_title`
+
+É REST: `/todolists/7/items/35/`
+
+**2 - Representa recursos por *representations***: No padrão REST, os *endpoints* identificam coisas e não formatos. Para que a comunicação entre diferentes plataformas aconteça, os recursos precisam ser disponibilizados em *endpoints* do mesmo padrão, e quem decide o tipo de formato é o cliente. Os formatos desejados pelo cliente são passados no cabeçalho da *request* usando a técnica de [negociação de conteúdo](https://en.wikipedia.org/wiki/Content_negotiation).
+
+Não é REST:
+
+- `browser: /showTodoList.php?format=html`
+- `application: /showTodoList.php?format=json`
+
+É REST: 
+
+- `browser: “I want /todolists/7/, please give me HTML.”`
+- `application: “I want /todolists/7/, please give me JSON.”`
+
+**3 - Mensagem auto descritivas**: O sistema REST deve ser capaz de interpretar qualquer mensagem isoladamente.
+
+Se tivermos a seguinte conversa:
+
+ - **msg1** - `/search-results?q=cars`
+ - **msg2** - `/search-results?page=2`
+ - **msg3** - `/search-results?page=3`
+
+e isolarmos a `msg2` ou a `msg3`, não é possível saber de qual recurso se trata. Está claro que é desejável acessar a página 2 ou 3, porém não se sabe de que.
+
+No estilo REST, mesmo se isolarmos a chamada 2 ou 3, claramente da para saber de qual recurso se trata.
+
+ - **msg1** - `/search-results?q=cars`
+ - **msg2** - `/search-results?q=cars&page=2`
+ - **msg3** - `/search-results?q=cars&page=3`
+
+**Conectar os Rercursos através de Links**: Quando entramos em um site que nunca vimos antes, usamos links para navegar e não precisamos modificar a url para tal. Quando falamos de conectar os recursos com links, estamos nos referindo à *hyperlinks*
+
+Não é REST:
+
+```
+/cars/7/
+
+{
+  "name": "My cars",
+  "items": [35, 36]
+}
+```
+
+É REST:
+```
+/cars/7/
+
+{
+  "name": "My cars",
+  "items": ["/cars/7/items/35/", "/cars/7/items/36/"]
+}
+```
+
+Utilizarei o [Django Rest Framework](http://www.django-rest-framework.org/) para a criação das API's.
+
+###### Message queue (MQ)
+
+Como a comunicação entre os micro serviços será assincrona, vou precisar de um *broker* para enfileirar todas as mensagens vindas das API's. O maior ganho ao usar um MQ é a alta escalabilidade.
+
+Será utilizado o [RabbitMQ](http://www.rabbitmq.com) para tal.
+
+### Micro Serviço 1
+### Micro Serviço 2
+### Micro Serviço 3
 
 
 ## Disponibilidade dos dados
@@ -90,3 +183,9 @@ O tráfego é composto por sistemas com duas diferentes arquiteturas: micro-serv
 ###### 5 - [Top 5 SQL Databases](https://dzone.com/articles/top-5-sql-databases)
 
 ###### 6 - [Top 4 NoSQL Databases](https://dzone.com/articles/top-4-nosql-databases)
+
+###### 7 - [What is an API and how it differs from REST API?](https://www.quora.com/What-is-an-API-and-how-it-differs-from-REST-API#)
+
+###### 8 - [What is a REST API?](https://www.quora.com/What-is-a-REST-API)
+
+###### 9 - [Communication in a microservice architecture](https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/architect-microservice-container-applications/communication-in-microservice-architecture)
