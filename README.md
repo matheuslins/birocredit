@@ -245,7 +245,6 @@ O endpoint **segue a regra 3** do padrão REST.
     'cpf': <number>,
     'ultima_consulta': {
       'data': <datetime>,
-      'hora:': <datetime>,
       'biro': {
         'nome': <string>,
         'site': <string>
