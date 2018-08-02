@@ -6,7 +6,7 @@ Os sistemas monolíticos não dão mais conta da demanda atual. Temos uma abund�
 
 ## A Solução
 
-Muitas empresas estão migrando seus softwares da MA(Monolithic Architecture) para a MSA(Microservices-Styled Architecture), um estilo de arquitetura baseada em microserviços. Algumas vantagem dessa mudança são:
+Muitas empresas estão migrando seus softwares da MA(Monolithic Architecture) para a MSA(Microservices-Styled Architecture), um estilo de arquitetura baseada em microserviços. Algumas vantagens desta mudança são:
 
  - **Escalabilidade**: É fácil escalar
  - **Fácil Mantenabilidade**: Como o problema é dividido em pequenas partes, permite que cada time de programadores trabalhe em diferentes componentes.
