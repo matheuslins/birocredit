@@ -166,9 +166,105 @@ Como a comunicação entre os micro serviços será assincrona, vou precisar de 
 
 Será utilizado o [RabbitMQ](http://www.rabbitmq.com) para tal.
 
-### Micro Serviço 1
-### Micro Serviço 2
-### Micro Serviço 3
+
+**Micro Serviço 1**
+
+API relacionada ao banco PostgreSQL. Neste caso, o payload se comunicará com um banco relacional.
+O endpoint **segue a regra 1** do padrão REST.
+
+- Endpoint: `/pessoas/<CPF>`
+
+ ```python
+
+  payload = {
+
+    'nome': <string>,
+    'cpf': <number>,
+    'endereco': {
+      'rua': <string>,
+      'numero': <number>,
+      'CEP': <number>,
+      'cidade': <string>,
+      'estado': <string>
+    },
+    dividas: [{
+      'tipo': <string>,
+      'status': <choice> (cartao, telefonia, energia, iptu, ipva),
+      'empresa': {
+        'razao_social': <string>,
+        'CNPJ': <number>
+      },
+      'valor': <number>,
+      'juros_acumulados': <number>
+      'total': <number>
+    }]
+  }
+ ```
+
+**Micro Serviço 2**
+
+API relacionada ao banco PostgreSQL. Esta também se comunicará com um banco relacional.
+O endpoint **segue a regra 1** do padrão REST.
+
+- Endpoint: `/score/<CPF>`
+
+ ```python
+
+  payload = {
+
+    'nome': <string>,
+    'cpf': <number>,
+    'endereco': {
+      'rua': <string>,
+      'numero': <number>,
+      'CEP': <number>,
+      'cidade': <string>,
+      'estado': <string>
+    },
+    'idade': <number>,
+    'bens': [{
+      'tipo': <string>,
+      'valor': <number>
+    }],
+    'fonte_renda': [<string>]
+  }
+ ```
+
+**Micro Serviço 3**
+
+Já na ultima API, a comunicação é com a base de um banco baseado em documentos.
+O endpoint **segue a regra 3** do padrão REST.
+
+- Endpoint: `/pessoas/<CPF>/eventos`
+
+ ```python
+
+  payload = {
+
+    'cpf': <number>,
+    'ultima_consulta': {
+      'data': <datetime>,
+      'hora:': <datetime>,
+      'biro': {
+        'nome': <string>,
+        'site': <string>
+      }
+    },
+    'movimentacoes': [{
+      'tipo': <choice> (saque, transferencia, pagamento de boleto),
+      'valor': <number>,
+    }],
+    'ultima_compra_cartao': [{
+      'item': <string>,
+      'valor': <number>,
+      'data': <datetime>,
+      'parcelado': <booleana>,
+      'qtd_parcelas': <number>
+      'a_vista': <booleana>,
+
+    }]
+  }
+ ```
 
 
 ## Disponibilidade dos dados
