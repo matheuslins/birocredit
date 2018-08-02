@@ -206,7 +206,7 @@ O endpoint **segue a regra 1** do padrão REST.
 API relacionada ao banco PostgreSQL. Esta também se comunicará com um banco relacional.
 O endpoint **segue a regra 1** do padrão REST.
 
-- Endpoint: `/score/<CPF>`
+- Endpoint: `/scores/<CPF>`
 
  ```python
 
