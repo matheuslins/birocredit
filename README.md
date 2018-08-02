@@ -20,7 +20,7 @@ Baseado nisso, foi criado o seguinte modelo arquitetural
 
 ![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/imagens/modelo-arquitetural.png)
 
-## Armazenamento
+## 1 - Armazenamento
 
 ![Armazenamento](https://github.com/matheuslins/birocredit/blob/master/imagens/armazenamento.png)
 
@@ -71,7 +71,7 @@ A escolha do MongoDB se dar por várias razões. São elas:
 - É facilmente escalável
 - Possui o recurso de particionamento de dados, o que facilita a escalabilidade horizontal
 
-## Tráfego
+## 2 - Tráfego
 
 ![Tragego](https://github.com/matheuslins/birocredit/blob/master/imagens/trafego.png)
 
@@ -267,9 +267,11 @@ O endpoint **segue a regra 3** do padrão REST.
  ```
 
 
-## Disponibilidade dos dados
+## 3 - Disponibilidade dos dados
 
 ![Disponibilidade dos dados](https://github.com/matheuslins/birocredit/blob/master/imagens/disponibilidade-dos-dados.png)
+
+
 
 ## Tecnologias Usadas
 ## Referências
