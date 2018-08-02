@@ -31,14 +31,16 @@ class Empresa(models.Model):
 
 
 class Divida(models.Model):
-    tipo = models.CharField('Tipo', max_length=1, choices=TIPOS_DIVIDA)
-    status = models.CharField('Status', max_length=1, choices=STATUS_DIVIDA)
     empresa = models.ForeignKey(
         Empresa,
         on_delete=models.CASCADE,
         related_name="divida_empresa",
         verbose_name='empresa'
     )
+    tipo = models.CharField('Tipo', max_length=1, choices=TIPOS_DIVIDA)
+    status = models.CharField('Status', max_length=1, choices=STATUS_DIVIDA)
+    valor = models.IntegerField('valor')
+    juro = models.IntegerField('Juro Acumulado')
 
     def __str__(self):
         return str(

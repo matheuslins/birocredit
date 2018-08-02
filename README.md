@@ -183,20 +183,19 @@ O endpoint **segue a regra 1** do padrão REST.
     'endereco': {
       'rua': <string>,
       'numero': <number>,
-      'CEP': <number>,
+      'cep': <number>,
       'cidade': <string>,
       'estado': <string>
     },
     dividas: [{
-      'tipo': <string>,
-      'status': <choice> (cartao, telefonia, energia, iptu, ipva),
+      'tipo': <string> (cartao, telefonia, energia, iptu, ipva),
+      'status': <choice> (paga, em_aberto),
       'empresa': {
         'razao_social': <string>,
-        'CNPJ': <number>
+        'cnpj': <number>
       },
       'valor': <number>,
-      'juros_acumulados': <number>
-      'total': <number>
+      'juro': <number>
     }]
   }
  ```
