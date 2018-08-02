@@ -18,7 +18,7 @@ Baseado nisso, foi criado o seguinte modelo arquitetural
 
 ## Modelo Arquitetural
 
-- ![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/arquiteturabirocredit.png)
+![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/arquiteturabirocredit.png)
 
 ## Armazenamento
 
