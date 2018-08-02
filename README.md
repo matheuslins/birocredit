@@ -26,9 +26,9 @@ Baseado nisso, foi criado o seguinte modelo arquitetural
 
 Um bom sistema de gerenciamento de dados (SGBD) deve fornecer mecanismos que auxiliam sua segurança. Um SGBD seguro oferece:
 
- - **Integridade**: Os dados precisam ser protegidos por qualquer alteração impŕopria ou não autorizada;
+ - **Integridade**: Os dados precisam ser protegidos por qualquer alteração imprópria ou não autorizada;
  - **Disponibilidade**: Os dados precisam estar disponíveis a todo momento para usuários e sistemas que estão autorizados à acessa-los;
- - **Confidenciabilidade**: Como o próprio nome já diz, o acesso aos dados precisa ser confiável, ou seja, assegura que o dado só pode ser concedido a quem tem concessão.
+ - **Confidenciabilidade**: Como o próprio nome já diz, o acesso aos dados precisa ser confiável, ou seja, assegurar que o dado só pode ser concedido a quem tem concessão.
 
 #### Base A
 
@@ -39,7 +39,7 @@ Banco de dados escolhido: PostgreSQL.
 O PostgreSQL é um banco robusto que possui vários recursos. O principal motivo que me fez escolher este banco para esta base foi integridade. Quando se refere a integridade dos dados, o PostgreSQL prover várias técnicas avançadas para tal.
 
  - **Checkpoints**: Para a gravação de dados em massa, o banco armazena temporariamente os dados na memória RAM. Como a mesma é volátil, existe um grande risco do dado se perder na transição. Os checkpoints forçam todas as transações concluidas a serem gravadas da RAM para o disco.
- - **Write-Ahead Logging (WAL)**: Todas as mudanças são gravadas somente após o registro no log. Esta técnica garante que se ocorrer alguma falha no meio da transição, seja possível recuperar o banco usando o log. Essa recuperação é conhecida REDO.
+ - **Write-Ahead Logging (WAL)**: Todas as mudanças são gravadas somente após o registro no log. Esta técnica garante que se ocorrer alguma falha no meio da transição, seja possível recuperar o banco usando o log. Essa recuperação é conhecida como *REDO*.
  - **Transaction Logging**: Além de serem gravadas no banco, todas as modificações de transações (Insert, Delete, Update e etc) são gravadas no log. Essa duplicidade de informação reduz a perda de dados por falha de hardware ou queda de energia.
  - **Triggers**: O usuário do banco pode escrever gatilhos que garantem a integridade referencial das tabelas.
  - **Commit/Rollback**: Certas funções de banco de dados requerem o agrupamento de transações de modo que, se qualquer parte de uma função falhar, toda a função falhe. Um exemplo disso é a transferência bancária. Caso o insert falhe, é dado um *rollback* na função e nenhum valor é movimentado.
@@ -56,7 +56,7 @@ Nesta base a performance é mais crucial que na base A, além disso, é preciso 
 
 Outra opção seria usar um banco NoSQL já que são bem mais performáticos do que o PostgreSQL (baseado no modelo DBMS). Porém neste caso, além da velocidade é preciso também garantir a segurança. Como os NoSQL's não possuem uma segurança tão robusta quanto os DBMS's, decidi usar o mesmo da Base A.
 
-Obs: Apesar de a Base A e a Base B terem propósitos um pouco diferentes. Não vi necessidade de mudar o banco. Afinal, o PostgreSQL trabalhar muito bem em ambas.
+Obs: Apesar de a Base A e a Base B terem propósitos um pouco diferentes, não vi necessidade de mudar o banco. Afinal, o PostgreSQL pode trabalhar muito bem em ambas.
 
 #### Base C
 
