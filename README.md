@@ -271,9 +271,35 @@ O endpoint **segue a regra 3** do padrão REST.
 
 ![Disponibilidade dos dados](https://github.com/matheuslins/birocredit/blob/master/imagens/disponibilidade-dos-dados.png)
 
+Para a disponibilização dos dados, acredito que a maneira mais eficiente é utilizando algum framework Java Script.
+Por isso, decidi criar uma aplicação dashboard simples baseade em React + Redux que utiliza Node Js para criar o ponto de entrada.
+Os dados são armazenados em uma nova base constriuida em cima do MongoDB.
 
+A escolha dessas tecnologias não foi por a caso. Possuo uma familiaridade com o MongoDB e React + Redux + Node Js. Além de
+que essas são algumas das ferramentas mais usadas atualmente para a criação de aplicações web.
+
+Possíveis interessados na consumação dos dados:
+
+- Pessoa Física
+- E-commerce
+- Governo
+- *Bureau* de crédito
+- Banco
 
 ## Tecnologias Usadas
+
+- Python
+- Django
+- Django Rest FrameWork
+- API Umbrella
+- Node Js
+- React
+- Redux
+- MongoDB
+- Docker
+- PostgreSQL
+- RabbitMQ
+
 ## Referências
 
 
