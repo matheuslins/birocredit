@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
+from apps.core.models import Empresa
 from .constants import TIPOS_DIVIDA, STATUS_DIVIDA
 
 
@@ -18,18 +20,6 @@ class Endereco(models.Model):
         verbose_name_plural = 'Endereços'
 
 
-class Empresa(models.Model):
-    razao_social = models.CharField('Razão Social', max_length=100)
-    cnpj = models.IntegerField('Status')
-
-    def __str__(self):
-        return str(self.razao_social or "[Not set]")
-
-    class Meta:
-        verbose_name = 'Empresa'
-        verbose_name_plural = 'Empresas'
-
-
 class Divida(models.Model):
     empresa = models.ForeignKey(
         Empresa,
@@ -39,8 +29,8 @@ class Divida(models.Model):
     )
     tipo = models.CharField('Tipo', max_length=1, choices=TIPOS_DIVIDA)
     status = models.CharField('Status', max_length=1, choices=STATUS_DIVIDA)
-    valor = models.IntegerField('valor')
-    juro = models.IntegerField('Juro Acumulado')
+    valor = models.FloatField('Valor', null=True, blank=True)
+    juro = models.IntegerField('Juro Acumulado', null=True, blank=True)
 
     def __str__(self):
         return str(
@@ -51,9 +41,31 @@ class Divida(models.Model):
         verbose_name_plural = 'Dividas'
 
 
+class Bem(models.Model):
+    tipo = models.CharField('Tipo', max_length=100)
+    valor = models.FloatField('Valor', null=True, blank=True)
+
+    def __str__(self):
+        return str(self.tipo or "[Not set]")
+
+    class Meta:
+        verbose_name = 'Bem'
+        verbose_name_plural = 'Bens'
+
+
 class Pessoa(models.Model):
     nome = models.CharField('Nome', max_length=100)
     cpf = models.IntegerField('CPF')
+    idade = models.IntegerField('Idade', null=True, blank=True)
+    fonte_renda = ArrayField(
+        models.TextField(null=True, blank=True, verbose_name='fonte_renda')
+    )
+    bem = models.ForeignKey(
+        Bem,
+        on_delete=models.CASCADE,
+        related_name="pessoa_bem",
+        verbose_name='bem'
+    )
     endereco = models.ForeignKey(
         Endereco,
         on_delete=models.CASCADE,

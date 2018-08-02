@@ -4,7 +4,7 @@ from .views import ScoreDetalheView
 
 urlpatterns = [
     path(
-        '<int>',
+        '/scores/<int>',
         ScoreDetalheView.as_view(),
         name='score-detalhe'
     )
