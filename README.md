@@ -16,9 +16,9 @@ Muitas empresas estão migrando seus softwares da MA(Monolithic Architecture) pa
 
 Baseado nisso, foi criado o seguinte modelo arquitetural
 
-### Modelo Arquitetural
+## Modelo Arquitetural
 
-- [Imagem do modelo]
+- ![Modelo Arquitetural](https://github.com/matheuslins/birocredit/blob/master/arquiteturabirocredit.png)
 
 ## Armazenamento
 
@@ -189,3 +189,5 @@ Será utilizado o [RabbitMQ](http://www.rabbitmq.com) para tal.
 ###### 8 - [What is a REST API?](https://www.quora.com/What-is-a-REST-API)
 
 ###### 9 - [Communication in a microservice architecture](https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/architect-microservice-container-applications/communication-in-microservice-architecture)
+
+###### 10 - [Asynchronous communication with message queue](https://codeblog.dotsandbrackets.com/asynchronous-communication-with-message-queue/)
