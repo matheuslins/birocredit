@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Bem, Divida, Endereco, Pessoa
+
+
+admin.site.register([Bem, Divida, Endereco, Pessoa])

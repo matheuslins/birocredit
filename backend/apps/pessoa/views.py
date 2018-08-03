@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 
-from .models import Pessoa, Evento
+from core.models import Evento
+from .models import Pessoa
 from .serializer import PessoaSerializer, EventoSerializer
 
 

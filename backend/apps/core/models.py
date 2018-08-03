@@ -1,24 +1,13 @@
 from django.db import models
 
-from apps.pessoa.models import Pessoa
+from empresa import models as empresa_models
+from pessoa import models as pessoa_models
 from .constants import TIPOS_MOVIMENTACAO
-
-
-class Biro(models.Model):
-    nome = models.CharField('Bereau', max_length=100)
-    site = models.CharField('Site', max_length=100)
-
-    def __str__(self):
-        return str(self.nome or "[Not set]")
-
-    class Meta:
-        verbose_name = 'Bereau'
-        verbose_name_plural = 'Bereaus'
 
 
 class Consulta(models.Model):
     biro = models.ForeignKey(
-        Biro,
+        empresa_models.Biro,
         on_delete=models.CASCADE,
         related_name="consulta_biro",
         verbose_name='biro'
@@ -72,7 +61,7 @@ class Compra(models.Model):
 
 class Evento(models.Model):
     pessoa = models.ForeignKey(
-        Pessoa,
+        pessoa_models.Pessoa,
         on_delete=models.CASCADE,
         related_name="evento_pessoa",
         verbose_name='pessoa'
@@ -105,15 +94,3 @@ class Evento(models.Model):
     class Meta:
         verbose_name = 'Evento'
         verbose_name_plural = 'Eventos'
-
-
-class Empresa(models.Model):
-    razao_social = models.CharField('Razão Social', max_length=100)
-    cnpj = models.IntegerField('Status')
-
-    def __str__(self):
-        return str(self.razao_social or "[Not set]")
-
-    class Meta:
-        verbose_name = 'Empresa'
-        verbose_name_plural = 'Empresas'

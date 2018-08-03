@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
-from apps.core.models import Empresa
+from empresa import models as empresa_models
 from .constants import TIPOS_DIVIDA, STATUS_DIVIDA
 
 
@@ -16,13 +16,25 @@ class Endereco(models.Model):
         return str(self.rua or "[Not set]")
 
     class Meta:
-        verbose_name = 'Endereço'
-        verbose_name_plural = 'Endereços'
+        verbose_name = 'Endereco'
+        verbose_name_plural = 'Enderecos'
+
+
+class Bem(models.Model):
+    tipo = models.CharField('Tipo', max_length=100)
+    valor = models.FloatField('Valor', null=True, blank=True)
+
+    def __str__(self):
+        return str(self.tipo or "[Not set]")
+
+    class Meta:
+        verbose_name = 'Bem'
+        verbose_name_plural = 'Bens'
 
 
 class Divida(models.Model):
     empresa = models.ForeignKey(
-        Empresa,
+        empresa_models.Empresa,
         on_delete=models.CASCADE,
         related_name="divida_empresa",
         verbose_name='empresa'
@@ -39,18 +51,6 @@ class Divida(models.Model):
     class Meta:
         verbose_name = 'Divida'
         verbose_name_plural = 'Dividas'
-
-
-class Bem(models.Model):
-    tipo = models.CharField('Tipo', max_length=100)
-    valor = models.FloatField('Valor', null=True, blank=True)
-
-    def __str__(self):
-        return str(self.tipo or "[Not set]")
-
-    class Meta:
-        verbose_name = 'Bem'
-        verbose_name_plural = 'Bens'
 
 
 class Pessoa(models.Model):

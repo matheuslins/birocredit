@@ -1,5 +1,5 @@
 
-TIPOS_DIVIDAS = [
+TIPOS_DIVIDA = [
     ("C", "Validação de Campos"),
     ("T", "Erro"),
     ("E", "Info"),

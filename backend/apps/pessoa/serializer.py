@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from .models import Pessoa, Evento
+from core.models import Evento
+from .models import Pessoa
 
 
 class PessoaSerializer(serializers.ModelSerializer):

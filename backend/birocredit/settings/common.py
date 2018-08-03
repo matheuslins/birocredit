@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 
 # change the apps's path
-sys.path.insert(0, str(BASE_DIR.join('apps')))
+sys.path.insert(0, str(BASE_DIR + '/apps'))
 
 # Application definition
 DJANGO_APPS = [
@@ -30,6 +30,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     'core',
+    'empresa',
     'pessoa',
 ]
 
