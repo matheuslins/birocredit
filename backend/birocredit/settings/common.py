@@ -1,17 +1,16 @@
 import os
 import sys
-import environ
 
-env = environ.Env(DEBUG=(bool, False))
+from environ import Env
+from pathlib import Path
 
-environ.Env.read_env()
+env = Env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = Path(__file__).absolute().parent.parent.parent
 
 # change the apps's path
-sys.path.insert(0, str(BASE_DIR + '/apps'))
+sys.path.insert(0, str(BASE_DIR.joinpath('apps')))
 
 # Application definition
 DJANGO_APPS = [
@@ -66,7 +65,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'birocredit.wsgi.application'
 
-DATABASES = {}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -94,12 +92,23 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static
+# Static e Media
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+BASE_DIR_STATIC = Path(__file__).absolute().parent.parent
+
+MEDIA_ROOT = str(BASE_DIR_STATIC.joinpath('media'))
+MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    str(BASE_DIR_STATIC.joinpath('static')),
+)
+STATIC_ROOT = env(
+    'STATIC_ROOT', default=str(BASE_DIR_STATIC.parent.joinpath('staticfiles'))
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 # Others

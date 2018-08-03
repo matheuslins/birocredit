@@ -1,0 +1,59 @@
+version: '2'
+
+volumes:
+  postgres_vl1:
+    driver: local
+#   postgres_vl2:
+#     driver: local
+#   mongodb_vl3:
+#     driver: local
+
+services:
+
+  postgres_db1:
+      image: postgres
+      restart: always
+      hostname: postgres_db1
+      container_name: postgres_db1
+      environment:
+       - POSTGRES_USER=birocredit1
+       - POSTGRES_PASSWORD=birocredit1
+       - POSTGRES_DB=birocredit1
+      volumes:
+        - postgres_vl1:/var/lib/postgresql
+      expose:
+        - 5432
+
+#   postgres_db2:
+#       image: postgres
+#       restart: always
+#       hostname: postgres_db2
+#       container_name: postgres_db2
+#       environment:
+#        - POSTGRES_USER=birocredit2
+#        - POSTGRES_PASSWORD=birocredit2
+#        - POSTGRES_DB=birocredit2
+#       volumes:
+#         - postgres_vl2:/var/lib/postgresql
+#       expose:
+#         - 5050
+
+  web:  
+      image: birocredit
+      container_name: web_birocredit
+      build:
+          context: .
+          dockerfile: ./docker/compose/django/Dockerfile-dev
+      command: python3 /app/manage.py runserver 0.0.0.0:8000
+      depends_on:
+          - postgres_db1
+        #   - postgres_db2
+      env_file:
+          - ./docker/environ/local.env
+      volumes:
+          - .:/app
+      ports:
+          - 8000:8000
+      links:
+          - postgres_db1
+        #   - postgres_db2

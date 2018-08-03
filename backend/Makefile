@@ -1,25 +1,34 @@
+DOCKER_COMPOSE=docker-compose.yml
+
+build:
+	@sudo docker-compose -f $(DOCKER_COMPOSE) build
+
+up:
+	@sudo docker-compose -f $(DOCKER_COMPOSE) up
+
 run:
-	python3 manage.py runserver
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web
+
+down:
+	@sudo docker-compose -f $(DOCKER_COMPOSE) down
 
 setup:
-	 python3 manage.py makemigrations
-	 python3 manage.py migrate
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py makemigrations; python3 manage.py migrate
 
 merge:
-	 python3 manage.py makemigrations --merge
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py makemigrations --merge
 
 user:
-	 python3 manage.py createsuperuser
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py createsuperuser
 
 shell:
-	 python3 manage.py shell
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py shell
 
 app:
-	 python3 manage.py startapp $(n)
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py startapp $(n)
 
 migra:
-	 python3 manage.py makemigrations $(n)
-	 python3 manage.py migrate $(n)
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py makemigrations $(n); python3 manage.py migrate $(n)
 
 clean: clean-build clean-others clean-pyc clean-test
 
