@@ -3,10 +3,10 @@ version: '2'
 volumes:
   postgres_vl1:
     driver: local
-#   postgres_vl2:
-#     driver: local
-#   mongodb_vl3:
-#     driver: local
+  postgres_vl2:
+    driver: local
+  mongodb_vl3:
+    driver: local
 
 services:
 
@@ -24,19 +24,29 @@ services:
       expose:
         - 5432
 
-#   postgres_db2:
-#       image: postgres
-#       restart: always
-#       hostname: postgres_db2
-#       container_name: postgres_db2
-#       environment:
-#        - POSTGRES_USER=birocredit2
-#        - POSTGRES_PASSWORD=birocredit2
-#        - POSTGRES_DB=birocredit2
-#       volumes:
-#         - postgres_vl2:/var/lib/postgresql
-#       expose:
-#         - 5050
+  postgres_db2:
+      image: postgres
+      restart: always
+      hostname: postgres_db2
+      container_name: postgres_db2
+      environment:
+       - POSTGRES_USER=birocredit2
+       - POSTGRES_PASSWORD=birocredit2
+       - POSTGRES_DB=birocredit2
+      volumes:
+        - postgres_vl2:/var/lib/postgresql
+      expose:
+        - 5050
+
+  mongo_db3:
+    image: mongo
+    hostname: mongo_db3
+    restart: on-failure
+    container_name: mongo_db3
+    volumes:
+      - mongodb_vl3:/data/db
+    expose:
+      - 27017
 
   web:  
       image: birocredit
@@ -47,7 +57,8 @@ services:
       command: python3 /app/manage.py runserver 0.0.0.0:8000
       depends_on:
           - postgres_db1
-        #   - postgres_db2
+          - postgres_db2
+          - mongo_db3
       env_file:
           - ./docker/environ/local.env
       volumes:
@@ -56,4 +67,5 @@ services:
           - 8000:8000
       links:
           - postgres_db1
-        #   - postgres_db2
+          - postgres_db2
+          - mongo_db3

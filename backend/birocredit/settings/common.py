@@ -63,6 +63,8 @@ TEMPLATES = [
     },
 ]
 
+DATABASES = {'default': {}}
+
 WSGI_APPLICATION = 'birocredit.wsgi.application'
 
 
