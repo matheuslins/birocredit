@@ -1,10 +1,10 @@
 
 TIPOS_DIVIDA = [
-    ("C", "Validação de Campos"),
-    ("T", "Erro"),
-    ("E", "Info"),
-    ("U", "Warning"),
-    ("A", "Warning")
+    ("C", "Cartão de Crédito"),
+    ("T", "Telefonia"),
+    ("E", "Energia"),
+    ("U", "IPTU"),
+    ("A", "IPVA")
 ]
 
 STATUS_DIVIDA = [

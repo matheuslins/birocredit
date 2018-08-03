@@ -242,6 +242,7 @@ O endpoint **segue a regra 3** do padrão REST.
 
   payload = {
 
+    'nome': <string>,
     'cpf': <number>,
     'ultima_consulta': {
       'data': <datetime>,
@@ -255,13 +256,9 @@ O endpoint **segue a regra 3** do padrão REST.
       'valor': <number>,
     }],
     'ultima_compra_cartao': [{
-      'item': <string>,
+      'itens': [<string>],
       'valor': <number>,
-      'data': <datetime>,
-      'parcelado': <booleana>,
-      'qtd_parcelas': <number>
-      'a_vista': <booleana>,
-
+      'data': <datetime>
     }]
   }
 

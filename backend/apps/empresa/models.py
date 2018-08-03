@@ -15,7 +15,7 @@ class Biro(models.Model):
 
 class Empresa(models.Model):
     razao_social = models.CharField('Razão Social', max_length=100)
-    cnpj = models.IntegerField('Status')
+    cnpj = models.CharField('CNPJ', unique=True, max_length=14)
 
     def __str__(self):
         return str(self.razao_social or "[Not set]")

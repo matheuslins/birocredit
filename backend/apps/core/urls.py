@@ -1,11 +1,11 @@
-from django.urls import path, include
-# from .views import ScoreDetalheView
+from django.urls import re_path
+from .views import ScoreDetalheView
 
 
 urlpatterns = [
-    # path(
-    #     '/scores/<int>',
-    #     ScoreDetalheView.as_view(),
-    #     name='score-detalhe'
-    # )
+    re_path(
+        r'^scores/(?P<cpf>\d+)/$',
+        ScoreDetalheView.as_view(),
+        name='score-detalhe'
+    )
 ]

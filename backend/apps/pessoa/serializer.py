@@ -1,16 +1,42 @@
 from rest_framework import serializers
 
-from core.models import Evento
-from .models import Pessoa
+from empresa.serializers import EmpresaSerializer
+from .models import Bem, Divida, Endereco, Pessoa
 
 
 class PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa
-        fields = '__all__'
+        exclude = ('id',)
 
 
-class EventoSerializer(serializers.ModelSerializer):
+class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Evento
-        fields = '__all__'
+        model = Endereco
+        exclude = ('id',)
+
+
+class BemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bem
+        exclude = ('id', 'pessoa')
+
+
+class DividaSerializer(serializers.ModelSerializer):
+    empresa = EmpresaSerializer(read_only=True)
+    total = serializers.SerializerMethodField()
+    tipo = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Divida
+        exclude = ('id', 'pessoa')
+
+    def get_total(self, obj):
+        return obj.valor + obj.juro
+
+    def get_tipo(self, obj):
+        return obj.get_tipo_display()
+
+    def get_status(self, obj):
+        return obj.get_status_display()

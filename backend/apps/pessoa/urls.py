@@ -1,15 +1,16 @@
-from django.urls import path, include
+from django.urls import re_path
+
 from .views import PessoaDetalheView, EventosDetalheView
 
 
 urlpatterns = [
-    path(
-        '<int>',
+    re_path(
+        r'^(?P<cpf>\d+)/$',
         PessoaDetalheView.as_view(),
         name='pessoa-detalhe'
     ),
-    path(
-        '<int>/eventos',
+    re_path(
+        r'^(?P<cpf>\d+)/eventos/$',
         EventosDetalheView.as_view(),
         name='eventos-detalhe'
     ),
