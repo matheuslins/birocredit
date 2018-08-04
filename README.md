@@ -158,7 +158,9 @@ Não é REST:
 }
 ```
 
-Utilizarei o [Django Rest Framework](http://www.django-rest-framework.org/) para a criação das API's.
+Utilizarei o [Django Rest Framework](http://www.django-rest-framework.org/) para a criação das API's e o
+Django para o gerenciamento do banco de dados. O Django possui um ORM bem robusto que facilita a criação e
+gerenciamento de tabelas, por isso a escolha.
 
 ###### Message queue (MQ)
 
