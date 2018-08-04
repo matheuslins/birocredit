@@ -318,7 +318,7 @@ Possíveis interessados na consumação dos dados:
 - Para ver as pessoas criadas:
 
  ```
-  http://localhost:8000/pessoas
+  http://localhost:8000/pessoas/
  ```
  - Para ver os dados de uma pessoa:
 
