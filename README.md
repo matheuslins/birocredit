@@ -292,13 +292,13 @@ Possíveis interessados na consumação dos dados:
 
 2 - Em seguida, para a instalação das dependências e levantamento dos serviços rode os seguintes comandos:
  ```
- - make build
- - make up
+ make build
+ make up
  ```
-3 - Entrar no aplicação
+3 - Entrar na aplicação (Serviço Django)
 
 ```
-  make web (para entrar no bash do serviço django)
+  make web
 ```
 
 4 - Precisamos gerar os dados que irão construir as bases. Para isso, em outro terminal, execute:
