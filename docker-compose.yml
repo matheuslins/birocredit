@@ -1,0 +1,54 @@
+version: '2'
+
+volumes:
+    postgres_vl1:
+        driver: local
+    umbrella_v:
+        driver: local
+
+services:
+
+    postgres_db1:
+        image: postgres
+        restart: always
+        hostname: postgres_db1
+        container_name: postgres_db1
+        environment:
+            - POSTGRES_USER=birocredit
+            - POSTGRES_PASSWORD=birocredit
+            - POSTGRES_DB=birocredit
+        volumes:
+            - postgres_vl1:/var/lib/postgresql
+        expose:
+            - 5432
+    web:  
+        image: birocredit
+        container_name: web_birocredit
+        build:
+            context: .
+            dockerfile: ./docker/compose/django/Dockerfile-dev
+        command: python3 /app/backend/manage.py runserver 0.0.0.0:8000
+        depends_on:
+            - postgres_db1
+        env_file:
+            - ./docker/environ/local.env
+        volumes:
+            - .:/app
+        ports:
+            - 8000:8000
+        links:
+            - postgres_db1
+
+    api-umbrella:
+        image: nrel/api-umbrella
+        container_name: api_umbrella
+        restart: always
+        depends_on:
+            - postgres_db1
+        links:
+            - postgres_db1
+        volumes:
+            - umbrella_v:/etc/api-umbrella
+        ports:
+            - 80:80
+            - 443:443

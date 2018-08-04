@@ -284,7 +284,23 @@ Possíveis interessados na consumação dos dados:
 - *Bureau* de crédito
 - Banco
 
-## Tecnologias Usadas
+## 4 - Executando o Projeto
+
+1 - Para começar é necessário que você tenha o `docker` e `docker-compose` instalados no seu computador.
+
+2 - Em seguida, para a instalação das dependências e levantamento dos serviços rode os seguintes comandos:
+ ```
+ - make build
+ - make up
+ ```
+3 - Precisamos gerar os dados que irão construir as bases. Para isso, execute:
+
+ ```
+  - make web (para entrar no bash do serviço django)
+  - python criar_bases.py
+ ```
+
+## 5 - Tecnologias Usadas
 
 - Python
 - Django
@@ -298,7 +314,21 @@ Possíveis interessados na consumação dos dados:
 - PostgreSQL
 - RabbitMQ
 
-## Referências
+## 5 - O processo de desenvolvimento e dificuldades
+
+Tive que estudar bastante para encontra a melhor forma arquitetural. Foi um dsafiador e ao mesmmo
+tempo pude aprender coisas novas. Como algumas tecnologias eu já domino, a estratégia usada foi comecar
+o código por elas.
+
+Com o tempo foi curto, tive que abrir mão algumas coisas e foca o *core* da solução.
+
+## 6 - Próximos Passos
+
+- Li dar com multiplos banco de dados no Django
+- Disponibilidar os dados com React + Reduz
+- Utilzar o RabbitMQ para gerenciar a fila de requests ao banco
+
+## 7 - Referências
 
 
 ###### 1 - [Microservice architecture: All the best practives you need to know](https://codingsans.com/blog/microservice-architecture-best-practices)

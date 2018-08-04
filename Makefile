@@ -30,6 +30,9 @@ app:
 migra:
 	@sudo docker-compose -f $(DOCKER_COMPOSE) run web python3 manage.py makemigrations $(n); python3 manage.py migrate $(n)
 
+web:
+	@sudo docker-compose -f $(DOCKER_COMPOSE) run web /bin/bash
+
 clean: clean-build clean-others clean-pyc clean-test
 
 clean-build:

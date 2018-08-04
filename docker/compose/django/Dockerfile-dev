@@ -2,13 +2,13 @@ FROM python:3.6
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /requirements.txt
+COPY ./backend/requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
 COPY ./docker/compose/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-WORKDIR /app
+WORKDIR /app/backend
 
 ENTRYPOINT ["/entrypoint.sh"]
