@@ -9,8 +9,14 @@ from core.serializer import (CompraSerializer, ConsultaSerializer,
                              EventoSerializer, MovimentacaoSerializer)
 from empresa.models import Empresa
 from empresa.serializers import EmpresaSerializer, BiroSerializer
+from .mixins import CreateListMixin
 from .models import Pessoa, Endereco, Divida
 from .serializer import PessoaSerializer, EnderecoSerializer, DividaSerializer
+
+
+class PessoaListCreateView(CreateListMixin, generics.ListCreateAPIView):
+    queryset = Pessoa.objects.all()
+    serializer_class = PessoaSerializer
 
 
 class PessoaDetalheView(generics.RetrieveAPIView):

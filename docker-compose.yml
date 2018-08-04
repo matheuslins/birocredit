@@ -8,6 +8,17 @@ volumes:
 
 services:
 
+    rabbitmq:
+        image: rabbitmq:3-management
+        restart: on-failure
+        container_name: rabbitmq
+        mem_limit: 500m
+        env_file:
+            - ./docker/environ/local.env
+        expose:
+            - 5672
+            - 15672
+
     postgres_db1:
         image: postgres
         restart: always
@@ -23,7 +34,7 @@ services:
             - 5432
     web:  
         image: birocredit
-        container_name: web_birocredit
+        container_name: birocreditweb
         build:
             context: .
             dockerfile: ./docker/compose/django/Dockerfile-dev

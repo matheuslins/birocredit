@@ -37,4 +37,4 @@ class MovimentacaoSerializer(serializers.ModelSerializer):
 class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
-        exclude = ('id',)
+        fields = '__all__'

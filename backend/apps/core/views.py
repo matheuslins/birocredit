@@ -7,6 +7,16 @@ from pessoa.serializer import (PessoaSerializer, EnderecoSerializer,
                                BemSerializer)
 
 
+class EnderecoListCreateView(generics.ListCreateAPIView):
+    queryset = pessoa.models.Endereco.objects.all()
+    serializer_class = EnderecoSerializer
+
+
+class BensListCreateView(generics.ListCreateAPIView):
+    queryset = pessoa.models.Bem.objects.all()
+    serializer_class = BemSerializer
+
+
 class ScoreDetalheView(generics.RetrieveAPIView):
     model = pessoa.models.Pessoa
     endereco = pessoa.models.Endereco

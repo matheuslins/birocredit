@@ -7,19 +7,19 @@ from .models import Bem, Divida, Endereco, Pessoa
 class PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa
-        exclude = ('id',)
+        fields = '__all__'
 
 
 class EnderecoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Endereco
-        exclude = ('id',)
+        fields = '__all__'
 
 
 class BemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bem
-        exclude = ('id', 'pessoa')
+        fields = '__all__'
 
 
 class DividaSerializer(serializers.ModelSerializer):

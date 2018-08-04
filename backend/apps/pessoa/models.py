@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 
 from birocredit.utils import parser_choice
 from empresa import models as empresa_models
@@ -25,9 +24,8 @@ class Pessoa(models.Model):
     nome = models.CharField('Nome', max_length=100)
     cpf = models.CharField('CPF', unique=True, max_length=14)
     idade = models.IntegerField('Idade', null=True, blank=True)
-    fonte_renda = ArrayField(
-        models.TextField(null=True, blank=True, verbose_name='fonte_renda')
-    )
+    fonte_renda = models.TextField(
+        null=True, blank=True, verbose_name='fonte_renda')
     endereco = models.ForeignKey(
         Endereco,
         on_delete=models.CASCADE,

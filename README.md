@@ -295,11 +295,45 @@ Possíveis interessados na consumação dos dados:
  - make build
  - make up
  ```
-3 - Precisamos gerar os dados que irão construir as bases. Para isso, execute:
+3 - Entrar no aplicação
+
+```
+  make web (para entrar no bash do serviço django)
+```
+
+4 - Precisamos gerar os dados que irão construir as bases. Para isso, em outro terminal, execute:
 
  ```
-  - make web (para entrar no bash do serviço django)
-  - python criar_bases.py
+  python criar_bases.py
+ ```
+
+5 - Criar um superusuário (opcional)
+
+ ```
+  python manage.py createsuperuser
+ ```
+
+6 - Acesse os Endpoins
+
+- Para ver as pessoas criadas:
+
+ ```
+  http://localhost:8000/pessoas
+ ```
+ - Para ver os dados de uma pessoa:
+
+ ```
+  http://localhost:8000/pessoas/<CPF>
+ ```
+
+ - Para ver os eventos de uma pessoa:
+
+  Ps: Como o script de criacao da base ainda não suporta a criação de eventos, é preciso
+  usar o Django admin para criar. Neste caso, o passo 5 não pode ser pulado
+
+ ```
+  http://localhost:8000/pessoas/<CPF>/eventos
+
  ```
 
 ## 5 - Tecnologias Usadas
@@ -318,17 +352,19 @@ Possíveis interessados na consumação dos dados:
 
 ## 5 - O processo de desenvolvimento e dificuldades
 
-Tive que estudar bastante para encontra a melhor forma arquitetural. Foi um dsafiador e ao mesmmo
+Tive que estudar bastante para encontra a melhor forma arquitetural. Foi desafiador e ao mesmmo
 tempo pude aprender coisas novas. Como algumas tecnologias eu já domino, a estratégia usada foi comecar
 o código por elas.
 
-Com o tempo foi curto, tive que abrir mão algumas coisas e foca o *core* da solução.
+Devido ao tempo, tive que abrir mão algumas implementações e focar no *core* da solução.
 
 ## 6 - Próximos Passos
 
 - Li dar com multiplos banco de dados no Django
-- Disponibilidar os dados com React + Reduz
+- Disponibilidar os dados com React + Redux + NodeJs
 - Utilzar o RabbitMQ para gerenciar a fila de requests ao banco
+- Testes unitários
+- Integração Contínua
 
 ## 7 - Referências
 
