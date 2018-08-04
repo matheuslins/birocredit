@@ -10,7 +10,7 @@ class Endereco(models.Model):
     numero = models.IntegerField('Numero')
     cidade = models.CharField('Cidade', max_length=100)
     estado = models.CharField('Estado', max_length=100)
-    cep = models.CharField('CEP', max_length=9)
+    cep = models.CharField('CEP', max_length=100)
 
     def __str__(self):
         return str(self.rua or "[Not set]")

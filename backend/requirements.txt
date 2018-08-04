@@ -21,6 +21,5 @@ simplegeneric==0.8.1
 six==1.11.0
 traitlets==4.3.2
 wcwidth==0.1.7
-cidadaobr==1.1
 requests==2.19.1
 beautifulsoup4==4.6.1

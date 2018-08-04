@@ -1,13 +1,14 @@
 import json
 import requests
 import random
-from environ import Env
-from cidadaobr import CidadaoBrasileiro
+import datetime
 
+from environ import Env
+from gerador.core import gerapessoa
 
 env = Env()
 
-QUANTIDADE_PESSOAS = 1
+QUANTIDADE_PESSOAS = 10
 POINT = env('POINT')
 
 
@@ -17,22 +18,28 @@ def criar_dados():
 
 def criar_pessoas():
     for _ in range(QUANTIDADE_PESSOAS):
-        cidadao = CidadaoBrasileiro()
+        cidadao = gerapessoa()
         endereco = requests.post(
             POINT + '/endereco/',
             json={
-                "rua": cidadao.endereco.logradouro,
-                "numero": cidadao.endereco.numero,
-                "cidade": cidadao.endereco.cidade,
-                "estado": cidadao.endereco.estado,
-                "cep": cidadao.endereco.cep
+                "rua": cidadao['endereco']['logradouro'],
+                "numero": cidadao['endereco']['numero'],
+                "cidade": cidadao['endereco']['cidade'],
+                "estado": cidadao['endereco']['uf'],
+                "cep": cidadao['endereco']['cep']
             },
             headers={'Content-Type': 'application/json'}
         )
+
+        def _idade(data_nascimento):
+            ano_nasceu = int(data_nascimento.split('/')[-1])
+            ano_atual = datetime.datetime.now().year
+            return ano_atual - ano_nasceu
+
         dados = {
-            "nome": cidadao.nome,
-            "cpf": cidadao.cpf,
-            "idade": cidadao.idade,
+            "nome": cidadao['nome'],
+            "cpf": cidadao['documentos']['cpf'],
+            "idade": _idade(cidadao['nascimento']),
             "fonte_renda": "Trabalho",
             "endereco": endereco.json()['id']
         }
