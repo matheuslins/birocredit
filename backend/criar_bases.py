@@ -4,7 +4,7 @@ import random
 import datetime
 
 from environ import Env
-from gerador.core import gerapessoa
+from gerador.base import gerapessoa
 
 env = Env()
 

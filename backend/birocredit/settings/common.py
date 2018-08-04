@@ -10,7 +10,7 @@ env = Env()
 BASE_DIR = Path(__file__).absolute().parent.parent.parent
 
 # change the apps's path
-sys.path.insert(0, str(BASE_DIR.joinpath('apps')))
+sys.path.insert(0, str(BASE_DIR.joinpath('modules')))
 
 # Application definition
 DJANGO_APPS = [
