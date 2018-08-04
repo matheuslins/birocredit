@@ -356,7 +356,7 @@ Tive que estudar bastante para encontra a melhor forma arquitetural. Foi desafia
 tempo pude aprender coisas novas. Como algumas tecnologias eu já domino, a estratégia usada foi comecar
 o código por elas.
 
-Devido ao tempo, tive que abrir mão algumas implementações e focar no *core* da solução.
+Devido ao tempo, tive que abrir mão de algumas implementações e focar no *core* da solução.
 
 ## 6 - Próximos Passos
 
