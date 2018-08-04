@@ -8,7 +8,7 @@ from gerador.core import gerapessoa
 
 env = Env()
 
-QUANTIDADE_PESSOAS = 10
+QUANTIDADE_PESSOAS = 100
 POINT = env('POINT')
 
 
@@ -17,7 +17,7 @@ def criar_dados():
 
 
 def criar_pessoas():
-    for _ in range(QUANTIDADE_PESSOAS):
+    for index in range(QUANTIDADE_PESSOAS):
         cidadao = gerapessoa()
         endereco = requests.post(
             POINT + '/endereco/',
@@ -61,7 +61,7 @@ def criar_pessoas():
         )
         # TODO: Criar eventos
         if pessoa.status_code == 201:
-            print ('Pessoa Criada')
+            print ('Pessoa Criada: {}'.format(index + 1))
         else:
             print('Erro ao criar pessoa')
 
