@@ -292,13 +292,13 @@ Possíveis interessados na consumação dos dados:
 
 2 - Em seguida, para a instalação das dependências e levantamento dos serviços rode os seguintes comandos:
  ```
- - make build
- - make up
+ make build
+ make up
  ```
-3 - Entrar no aplicação
+3 - Entrar na aplicação (Serviço Django)
 
 ```
-  make web (para entrar no bash do serviço django)
+  make web
 ```
 
 4 - Precisamos gerar os dados que irão construir as bases. Para isso, em outro terminal, execute:
@@ -318,7 +318,7 @@ Possíveis interessados na consumação dos dados:
 - Para ver as pessoas criadas:
 
  ```
-  http://localhost:8000/pessoas
+  http://localhost:8000/pessoas/
  ```
  - Para ver os dados de uma pessoa:
 
@@ -356,7 +356,7 @@ Tive que estudar bastante para encontra a melhor forma arquitetural. Foi desafia
 tempo pude aprender coisas novas. Como algumas tecnologias eu já domino, a estratégia usada foi comecar
 o código por elas.
 
-Devido ao tempo, tive que abrir mão algumas implementações e focar no *core* da solução.
+Devido ao tempo, tive que abrir mão de algumas implementações e focar no *core* da solução.
 
 ## 6 - Próximos Passos
 
