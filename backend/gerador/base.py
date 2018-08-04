@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 '''
 
 Não é um código feito por mim!
